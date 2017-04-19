@@ -161,14 +161,14 @@ function getInputs(){
   document.getElementById("resultado").innerHTML =
   "<br>--------------------------------------------------------</br>"+
   "<br>Consumo Mensal: "+sistema.consumoMensal+ "kWh </br>"+
-  "<br>Horas de Sol Pleno: "+sistema.HSP+"</br>"+
+  "<br>Horas de Sol Pleno: "+sistema.HSP+" kWh/m².dia</br>"+
   "<br>Consumo médio diário: "+sistema.consumoDiario+ "Wh </br>"+
   "<br>Potência necessária: "+potInteira+"W</br>"+
   "<br>--------------------PAINEL----------------------------</br>"+
   "<br>Painel: "+painel.nome+"</br>"+
   "<br>Potência do painel: "+painel.potencia+" W</br>"+
-  "<br>Número de painéis decimal:"+numPaineisDecimal+"</br>"+
   "<br>--------------------ARRANJO----------------------------</br>"+
+  "<br>Número de painéis decimal:"+numPaineisDecimal+"</br>"+
   "<br>Número de painéis: "+ sistema.numPaineis+"</br>"+
   "<br>Painéis em série: "+ arranjo.numSerie+"</br>"+
   "<br>Strings em paralelo: "+arranjo.numParalelo+"</br>"+
@@ -178,13 +178,13 @@ function getInputs(){
   "<br>Corrente do arranjo FV: "+painel.correnteSC*arranjo.numParalelo+"A </br>"+
   "<br>--------------------INVERSOR----------------------------</br>"+
   "<br>Inversor:"+inversor.nome+"</br>"+
-  "<br>Máxima potência de entrada do inversor: "+inversor.potMaxEntrada+"</br>"+
+  "<br>Máxima potência de entrada do inversor: "+inversor.potMaxEntrada+"W</br>"+
   "<br>Faixa MPPT: "+inversor.VmpptMin+"V ~ "+inversor.VmpptMax+" V </br>"+
-  "<br>Corrente máxima de entrada: "+inversor.correnteMax+" A +</br>"+
+  "<br>Corrente máxima de entrada: "+inversor.correnteMax+" A </br>"+
   "<br>--------------------SISTEMA----------------------------</br>"+
-  "<br>Potência:"+sistema.potencia+" W</br>"+
+  "<br>Potência: "+sistema.potencia+" W</br>"+
   "<br>Na faixa MPPT("+inversor.VmpptMin+"V - "+inversor.VmpptMax+" V): "+sistema.MPPTativo+"</br>"+
-  "<br>Sistema ok:"+sistema.condicao+"</br>";
+  "<br>Sistema ok: "+sistema.condicao+"</br>";
   clean();
 }
 
