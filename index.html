@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/basic.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>TCC Projeto Fotovoltaico</title>
+  </head>
+  <body>
+    <br>Consumo mensal [kWh]: <input type="text" id="consumo" ></br>
+    <br>Irradiação | Horas de Sol Pleno: <input type="text" id="hsp"></br>
+    <br><button class="btn btn-info btn-responsive" onclick="getInputs()">Enviar</button> </br>
+    <div class="print" id = "resultado">
+      <!-- aqui vai o resultado do dimensionamento -->
+    </div>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAu-0SZfNXqOaODDwyTjSm_Iuvp2s3f9gs",
+      authDomain: "projeto-fotovoltaico.firebaseapp.com",
+      databaseURL: "https://projeto-fotovoltaico.firebaseio.com",
+      storageBucket: "projeto-fotovoltaico.appspot.com",
+      messagingSenderId: "369417793269"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="js/main.js"></script>
+</html>
