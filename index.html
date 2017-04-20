@@ -8,8 +8,55 @@
     <title>TCC Projeto Fotovoltaico</title>
   </head>
   <body>
-    <br>Consumo mensal [kWh]: <input type="text" id="consumo" ></br>
-    <br>Irradiação | Horas de Sol Pleno [kWh/m².dia]: <input type="text" id="hsp"></br>
+    <br>Consumo mensal [kWh]: <input type="text" id="consumo" >
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">?</button>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Consumo mensal</h4>
+            </div>
+            <div class="modal-body">
+              <br> O consumo mensal deve ser estimado a partir da média de todos os consumos.</br>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </br>
+    <br>Irradiação | Horas de Sol Pleno [kWh/m².dia]: <input type="text" id="hsp">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">?</button>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Horas de Sol Pleno</h4>
+          </div>
+          <div class="modal-body">
+            <br>As horas de sol pleno podem ser obtidas clicando <a target="_blank" href="http://www.cresesb.cepel.br/index.php#data">aqui</a>.</br>
+            <br>Na aba Potêncial Energético acessar: Potencial Solar.</br>
+            <br><img src="imagens/potencialsolar.jpg" alt="Potencial Solar"></br>
+            <br>No Sun Data, colocar as coordenadas do local de instalação:</br>
+            <br><img src="imagens/coordenada.jpg" alt="coordenadas gps"></br>
+            <br>Escolher a região mais próxima e pegar a maior média:</br>
+            <br><img src="imagens/hsp.jpg" alt="Horas de Sol Pleno">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </br>
+    </br>
     <br><button class="btn btn-info btn-responsive" onclick="getInputs()">Enviar</button> </br>
     <div class="print" id = "resultado">
       <!-- aqui vai o resultado do dimensionamento -->
@@ -28,4 +75,6 @@
     firebase.initializeApp(config);
   </script>
   <script src="js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
