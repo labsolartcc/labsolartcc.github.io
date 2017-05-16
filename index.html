@@ -3,66 +3,209 @@
   <head>
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/basic.css" rel="stylesheet">
     <meta charset="utf-8">
     <title>TCC Projeto Fotovoltaico</title>
   </head>
   <body>
-    <br>Consumo mensal [kWh]: <input type="text" id="consumo" >
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">?</button>
-      <!-- Modal -->
-      <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Consumo mensal</h4>
+    <div class="container">
+      <img src="imagens/labsolar.jpg" class="img-responsive" alt="labsolarLogo">
+      <br>
+      <div class="row">
+            <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">Consumo mensal</span>
+                <input type="text" class="form-control" placeholder="kWh" aria-describedby="sizing-addon1" id="consumo">
+              </div>
             </div>
-            <div class="modal-body">
-              <br> O consumo mensal deve ser estimado a partir da média de todos os consumos.</br>
+            <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">?</button>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Consumo mensal</h4>
+                    </div>
+                    <div class="modal-body">
+                      <br> O consumo mensal deve ser estimado a partir da média de todos os consumos.</br>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <div class="hsp">
+            <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">Irradiação</span>
+                <input type="text" class="form-control" placeholder="kWh/m².dia" aria-describedby="sizing-addon1" id="hsp">
+              </div>
+            </div>
+            <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">?</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Irradiação | Horas de Sol Pleno [kWh/m².dia]</h4>
+                  </div>
+                  <div class="modal-body">
+                    <br>As horas de sol pleno podem ser obtidas clicando <a target="_blank" href="http://www.cresesb.cepel.br/index.php#data">aqui</a>.</br>
+                    <br>Na aba Potêncial Energético acessar: Potencial Solar.</br>
+                    <br><img src="imagens/potencialsolar.jpg" alt="Potencial Solar"></br>
+                    <br>No Sun Data, colocar as coordenadas do local de instalação:</br>
+                    <br><img src="imagens/coordenada.jpg" alt="coordenadas gps"></br>
+                    <br>Escolher a região mais próxima e pegar a maior média:</br>
+                    <br><img src="imagens/hsp.jpg" alt="Horas de Sol Pleno"></br>
+                    <br>Inserir o valor decimal utilizando ponto ao invés de vírgula.</br>
+                    <br>No exemplo acima, utilizar 4.34</br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">Tarifa de energia</span>
+            <input type="text" class="form-control" placeholder="R$/kWh" aria-describedby="sizing-addon1" id="tarifa">
+          </div>
+        </div>
+        <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalTarifa">?</button>
+        </div>
+          <!-- Modal -->
+          <div class="modal fade" id="myModalTarifa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Tarifa de energia</h4>
+                </div>
+                <div class="modal-body">
+                  <br> Preço pago pelo kWh em sua residência.</br>
+                  <br> Ao inserir o dado, utilizar . ao invés de , </br>
+                  <br>Exemplo: R$/kWh = 0,80; Inserir: 0.80</br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Padrão de entrada<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <!-- alocar painel1 -->
+            <li><a href="#" onclick="custoDisponibilidade('mono')">Monofásico</a></li>
+            <!-- alocar painel2 -->
+            <li><a href="#" onclick="custoDisponibilidade('bi')">Bifásico</a></li>
+            <!-- alocar painel3 -->
+            <li><a href="#" onclick="custoDisponibilidade('tri')">Trifásico</a></li>
+          </ul>
+        </div>
       </div>
-    </br>
-    <br>Irradiação | Horas de Sol Pleno [kWh/m².dia]: <input type="text" id="hsp">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">?</button>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Painel<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <!-- alocar painel1 -->
+          <li><a href="#" onclick="choosePainel(painel255)">255W</a></li>
+          <!-- alocar painel2 -->
+          <li><a href="#" onclick="choosePainel(painel150)">150W</a></li>
+          <li role="separator" class="divider"></li>
+          <li>
+            <!-- Button trigger modal -->
+            <a data-toggle="modal" data-target="#myModal3">Inserir seu painel</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </br>
+    <div><button class="btn btn-info btn-responsive"  id="go" onclick="getInputs()">Enviar</button></div><br>
+    <div id="div1" style="display:none" class="row res"><button class="btn btn-danger btn-responsive col-md-6">Sistema</button><button class="btn btn-warning btn-responsive col-md-6">Arranjo</button></div><br>
+    <div id="div2" style="display:none" class="row res"><button class="btn btn-info btn-responsive col-md-6">Equipamentos</button><button class="btn btn-success btn-responsive col-md-6">Análise de Investimentos</button></div><br>
+
+    <div class="print" id = "resultado">
+      <!-- aqui vai o resultado do dimensionamento -->
+    </div>
+    <!-- Modal 3-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Horas de Sol Pleno</h4>
+            <h4 class="modal-title" id="myModalLabel">Dados do painel</h4>
           </div>
           <div class="modal-body">
-            <br>As horas de sol pleno podem ser obtidas clicando <a target="_blank" href="http://www.cresesb.cepel.br/index.php#data">aqui</a>.</br>
-            <br>Na aba Potêncial Energético acessar: Potencial Solar.</br>
-            <br><img src="imagens/potencialsolar.jpg" alt="Potencial Solar"></br>
-            <br>No Sun Data, colocar as coordenadas do local de instalação:</br>
-            <br><img src="imagens/coordenada.jpg" alt="coordenadas gps"></br>
-            <br>Escolher a região mais próxima e pegar a maior média:</br>
-            <br><img src="imagens/hsp.jpg" alt="Horas de Sol Pleno">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Potência:</span>
+              <input id="painelpotencia"type="text" class="form-control" placeholder="W" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Tensão máxima:</span>
+              <input id="painelvmax" type="text" class="form-control" placeholder="V" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Tensão mínima:  </span>
+              <input id="painelvmin" type="text" class="form-control" placeholder="V" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Corrente de curto circuito:</span>
+              <input id="correntesc" type="text" class="form-control" placeholder="A" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Nome:</span>
+              <input id="painelnome" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Preço:</span>
+              <input id="preco" type="text" class="form-control" placeholder="R$" aria-describedby="sizing-addon1">
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          </div>
+            <div>
+              <button type="button" class="btn btn-danger" onclick="dadosPainel()">Enviar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" >Fechar</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </br>
-    </br>
-    <br><button class="btn btn-info btn-responsive" onclick="getInputs()">Enviar</button> </br>
-    <div class="print" id = "resultado">
-      <!-- aqui vai o resultado do dimensionamento -->
-    </div>
+  </div>
+  </div>
   </body>
+  <style>
+    #res {
+        height: 200px;
+    }
+  </style>
   <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/main.js"></script>
   <script>
     // Initialize Firebase
     var config = {
@@ -74,7 +217,4 @@
     };
     firebase.initializeApp(config);
   </script>
-  <script src="js/main.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
