@@ -135,7 +135,7 @@
           <li role="separator" class="divider"></li>
           <li>
             <!-- Button trigger modal -->
-            <a data-toggle="modal" data-target="#myModal3">Inserir seu painel</a>
+            <a data-toggle="modal" data-target="#myModalPainelinserido">Inserir seu painel</a>
           </li>
         </ul>
       </div>
@@ -143,14 +143,13 @@
   </div>
   </br>
     <div><button class="btn btn-info btn-responsive"  id="go" onclick="getInputs()">Enviar</button></div><br>
-    <div id="div1" style="display:none" class="row res"><button class="btn btn-danger btn-responsive col-md-6">Sistema</button><button class="btn btn-warning btn-responsive col-md-6">Arranjo</button></div><br>
-    <div id="div2" style="display:none" class="row res"><button class="btn btn-info btn-responsive col-md-6">Equipamentos</button><button class="btn btn-success btn-responsive col-md-6">Análise de Investimentos</button></div><br>
-
+    <div id="div1" style="display:none" class="row"><button id="button-sistema" class="btn res btn-danger btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalSistema">Sistema</button><button  id="button-arranjo" class="res btn btn-warning btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalArranjo">Arranjo</button></div><br>
+    <div id="div2" style="display:none" class="row"><button id="button-equipamento" class="btn res btn-info btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalEquipamentos">Equipamentos</button><button id="button-analise" class="res btn btn-success btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalAnalise">Análise de Investimentos</button></div><br>
     <div class="print" id = "resultado">
       <!-- aqui vai o resultado do dimensionamento -->
     </div>
-    <!-- Modal 3-->
-    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Modal Painel inserido-->
+    <div class="modal fade" id="myModalPainelinserido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -184,21 +183,123 @@
             </div>
           </div>
           <div class="modal-footer">
-          </div>
             <div>
               <button type="button" class="btn btn-danger" onclick="dadosPainel()">Enviar</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" >Fechar</button>
             </div>
           </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Sistema -->
+      <div class="modal fade" id="myModalSistema" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Dados do sistema</h4>
+            </div>
+            <div class="modal-body">
+              <div id="consumo-mensal"></div>
+              <div id="consumo-diario"></div>
+              <div id="horas-de-sol"></div>
+              <div id="pot-necessaria"></div>
+              <div id="pot-sistema"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Arranjo -->
+      <div class="modal fade" id="myModalArranjo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Arranjo dos panéis</h4>
+            </div>
+            <div class="modal-body">
+              <div id="numero-inversores1"></div>
+              <div id="numero-inversores3"></div>
+              <div id="numero-paineis"></div>
+              <div id="paineis-serie"></div>
+              <div id="horas-de-sol"></div>
+              <div id="pot-necessaria"></div>
+              <div id="pot-sistema"></div>
+              <!-- <br>Número de painéis decimal:"+numPaineisDecimal+</br> -->
+              <div id="paineis-serie"></div>
+              <div id="paineis-paralelo"></div>
+              <div id="v-max"></div>
+              <div id="v-min"></div>
+              <div id="paineis-paralelo"></div>
+              <div id="corrente-arranjo"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Equipamentos -->
+      <div class="modal fade" id="myModalEquipamentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Equipamentos</h4>
+            </div>
+            <div class="modal-body">
+              <br>Painel</br>
+              <div id="painel-nome"></div>
+              <div id="potencia-painel"></div>
+              <div id="vmax-painel"></div>
+              <div id="vmin-painel"></div>
+              <div id="corrente-painel"></div>
+              <br>Inversor</br>
+              <div id="inversor-nome"></div>
+              <div id="inversor-mppt"></div>
+              <div id="inversor-corrente-entrada"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Análise -->
+      <div class="modal fade" id="myModalAnalise" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Análise de Investimentos</h4>
+            </div>
+            <div class="modal-body">
+              <div id="custo-total-paineis"></div>
+              <div id="custo-total-inversor"></div>
+              <div id="custo-total-estrutura"></div>
+              <div id="custo-total-cabeamento"></div>
+              <div id="custo-total-sistema"></div>
+              <div id="valor-presente-liquido"></div>
+              <div id="taxa-interna-retorno"></div>
+              <div id="payback"></div>
+              <div id="payback-descontado"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
   </body>
   <style>
-    #res {
-        height: 200px;
+    button.res {
+        height: 80px;
+        /*margin-left: 2px;
+        margin-right: 2px;*/
     }
   </style>
   <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
