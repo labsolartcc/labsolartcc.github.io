@@ -7,10 +7,10 @@
     <title>TCC Projeto Fotovoltaico</title>
   </head>
   <body class="container-fluid">
-      <img src="imagens/labsolar.jpg" class="img-responsive" alt="labsolarLogo">
+      <img src="imagens/labsolar.jpg" class="img-responsive center-block" alt="labsolarLogo">
       <br>
       <div class="row">
-            <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+            <div class="col-xs-5 col-md-5 col-sm-10 col-lg-5">
               <div class="input-group">
                 <span class="input-group-addon" id="sizing-addon2">Consumo mensal</span>
                 <input type="text" class="form-control" placeholder="kWh" aria-describedby="sizing-addon1" id="consumo">
@@ -38,7 +38,7 @@
                 </div>
               </div>
           <div class="hsp">
-            <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+            <div class="col-xs-5 col-md-5 col-sm-10 col-lg-5">
               <div class="input-group">
                 <span class="input-group-addon" id="sizing-addon2">Irradiação</span>
                 <input type="text" class="form-control" placeholder="kWh/m².dia" aria-describedby="sizing-addon1" id="hsp">
@@ -77,7 +77,7 @@
         </div>
     <br>
     <div class="row">
-        <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+        <div class="col-xs-5 col-md-5 col-sm-10 col-lg-5">
           <div class="input-group">
             <span class="input-group-addon" id="sizing-addon2">Tarifa de energia</span>
             <input type="text" class="form-control" placeholder="R$/kWh" aria-describedby="sizing-addon1" id="tarifa">
@@ -142,8 +142,8 @@
   </div>
   </br>
     <div><button class="btn btn-info btn-responsive"  id="go" onclick="getInputs()">Enviar</button></div><br>
-    <div id="div1" style="display:none" class="row"><button id="button-sistema" class="btn res btn-danger btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalSistema">Sistema</button><button  id="button-arranjo" class="res btn btn-warning btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalArranjo">Arranjo</button></div><br>
-    <div id="div2" style="display:none" class="row"><button id="button-equipamento" class="btn res btn-info btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalEquipamentos">Equipamentos</button><button id="button-analise" class="res btn btn-success btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalAnalise">Análise de Investimentos</button></div><br>
+    <div id="div1" style="display:none" class="row"><button id="button-sistema" class="btn res btn-danger btn-responsive col-xs-6 col-md-6 col-sm-12 col-lg-6" data-toggle="modal" data-target="#myModalSistema">Sistema</button><button  id="button-arranjo" class="res btn btn-warning btn-responsive col-xs-6 col-md-6 col-sm-12 col-lg-6" data-toggle="modal" data-target="#myModalArranjo">Arranjo</button></div><br>
+    <div id="div2" style="display:none" class="row"><button id="button-tutorial" class="btn res btn-info btn-responsive col-xs-6 col-md-6 col-sm-12 col-lg-6" data-toggle="modal" data-target="#myModalEquipamentos">Tutorial</button><button id="button-analise" class="res btn btn-success btn-responsive col-xs-6 col-md-6 col-sm-12 col-lg-6" data-toggle="modal" data-target="#myModalAnalise">Análise de Investimentos</button></div><br>
     <div class="print" id = "resultado">
       <!-- aqui vai o resultado do dimensionamento -->
     </div>
@@ -220,9 +220,9 @@
               <h4 class="modal-title" id="myModalLabel">Arranjo dos panéis</h4>
             </div>
             <div class="modal-body">
+              <div id="numero-paineis"></div>
               <div id="numero-inversores1"></div>
               <div id="numero-inversores3"></div>
-              <div id="numero-paineis"></div>
               <div id="paineis-serie"></div>
               <div id="horas-de-sol"></div>
               <div id="pot-necessaria"></div>
@@ -230,10 +230,28 @@
               <!-- <br>Número de painéis decimal:"+numPaineisDecimal+</br> -->
               <div id="paineis-serie"></div>
               <div id="paineis-paralelo"></div>
+              <div id="arranjo-imagem"><img src='imagens/paineis.png' class='img-responsive center-block' alt='tabela'></div>
+              <div>Desse modo:</div>
               <div id="v-max"></div>
               <div id="v-min"></div>
               <div id="paineis-paralelo"></div>
               <div id="corrente-arranjo"></div>
+
+              <br><strong>Painel</strong></br>
+              <div id="painel-imagem"></div>
+              <div id="painel-nome"></div>
+              <div id="potencia-painel"></div>
+              <div id="vmax-painel"></div>
+              <div id="vmin-painel"></div>
+              <div id="corrente-painel"></div>
+              <br><strong>Inversor</strong></br>
+              <div id="inversor-imagem"></div>
+              <div id="inversor-nome"></div>
+              <div id="inversor-max-pot-entrada"></div>
+              <div id="inversor-tensao-max-entrada"></div>
+              <div id="inversor-mppt"></div>
+              <div id="tensao-min-inicializacao"></div>
+              <div id="inversor-corrente-entrada"></div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -241,25 +259,64 @@
           </div>
         </div>
       </div>
-      <!-- Modal Equipamentos -->
+      <!-- Modal Tutorial -->
       <div class="modal fade" id="myModalEquipamentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Equipamentos</h4>
+              <h4 class="modal-title" id="myModalLabel">Tutorial</h4>
             </div>
             <div class="modal-body">
-              <br>Painel</br>
-              <div id="painel-nome"></div>
-              <div id="potencia-painel"></div>
-              <div id="vmax-painel"></div>
-              <div id="vmin-painel"></div>
-              <div id="corrente-painel"></div>
-              <br>Inversor</br>
-              <div id="inversor-nome"></div>
-              <div id="inversor-mppt"></div>
-              <div id="inversor-corrente-entrada"></div>
+              <ul class="nav nav-pills" id="topo">
+                <li class="current"><a href="#determinacao-demanda">Demanda</a></li>
+                <li><a href="#determinacao-potencia">Potência</a></li>
+                <li><a href="#determinacao-inversor">Inversor</a></li>
+                <li><a href="#determinacao-paineis">Painéis</a></li>
+                <li><a href="#determinacao-arranjo">Arranjo</a></li>
+                <li><a href="#determinacao-energia">Energia</a></li>
+                <li><a href="#determinacao-financeiro" >Investimento</a></li>
+                <!-- <li><a href="#determinacao-arranjo" class="scrollSuave">Arranjo</a></li> -->
+              </ul>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-demanda"><strong><br><center>Cálculo da demanda e dos recursos de Energia</center></strong></a></div>
+              <div id="tutorial-intro"></div>
+              <div id="tutorial-hsp-imagem"><img src="imagens/hsp.png" class="img-responsive center-block" alt="labsolarLogo"></div>
+              <div id="tutorial-hsp"></div>
+              <div id="tutorial-consumo-mensal"></div>
+              <div id="tutorial-custo-disponibilidade"></div>
+              <div id="tutorial-intro-diaria"></div>
+              <div id="tutorial-consumo-diario"></div>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-potencia"><strong><br><center>Estimativa da Potência do sistema</center></strong></a></div>
+              <div id="tutorial-TD"></div>
+              <div id="tutorial-pot-necessaria"></div>
+              <div id="tutorial-dimensionamento-intro"></div>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-inversor"><strong><br><center>Determinação da potência e do modelo do inversor</center></strong></a></div>
+              <div id="tutorial-dimensionamento-10000"></div>
+              <div id="tutorial-dimensionamento-10000-potencia"></div>
+              <div id="tutorial-dimensionamento-10000-inversor"></div>
+              <div id="tutorial-dimensionamento-10000"></div>
+              <div id="tutorial-dimensionamento"></div>
+              <div id="tutorial-dimensionamento-potencia"></div>
+              <div id="tutorial-dimensionamento-inversor"></div>
+              <div id="tutorial-dimensionamento-gt260"></div>
+              <div id="tutorial-dimensionamento-gt260-potencia"></div>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-paineis"><strong><br><center>Determinação do número de painéis e do arranjo fotovoltaico</center></strong></a></div>
+              <div id="tutorial-dimensionamento-numero-paineis-1"></div>
+              <div id="tutorial-dimensionamento-numero-paineis-2"></div>
+              <div><a href="#topo"  style="text-decoration:none" id="determinacao-arranjo"><strong><br><center>Determinação do arranjo dos painéis</center></strong></a></div>
+              <div id="tutorial-dimensionamento-arranjo"></div>
+              <div id="tutorial-dimensionamento-arranjo-inversor"></div>
+              <div id="tutorial-dimensionamento-arranjo-painel"></div>
+              <div id="tutorial-dimensionamento-arranjo-2"></div>
+              <div id="tutorial-dimensionamento-arranjo-3"></div>
+              <div><a href="#topo"  style="text-decoration:none" id="determinacao-energia"><strong><br><center>Energia produzida pelo sistema</center></strong></a></div>
+              <div id="tutorial-energia-diaria"></div>
+              <div id="tutorial-energia-mensal"></div>
+              <div id="tutorial-energia-anual"></div>
+              <div><a href="#topo"  style="text-decoration:none" id="determinacao-financeiro"><strong><br><center>Análise de Investimentos</center></strong></a></div>
+              <div id="tutorial-financeiro"></div>
+              <div id="tutorial-financeiro-2"></div>
+              <div id="tutorial-dimensionamento"></div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
