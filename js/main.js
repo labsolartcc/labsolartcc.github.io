@@ -2,8 +2,6 @@
 //Dimensionamento da potência do sistema em até 10kW
 //A diferença entre consumo e custo de disponibilidade pode ser somente maior que 52
 
-
-
 var investimento = { "tma":0,               //taxa mínima de atratividade - Poupança: 6.1% ,LCI: 9.8% -Anual
                      "decaimentoPainel":0,  //Decaimento anual da produção do painéis - 0.07
                      "arrayDecaimento":[],
@@ -32,7 +30,8 @@ var painel =  { "potencia":0,
                  "Vmin":0,
                  "correnteSC":0,
                  "nome":"",
-                 "preco":0
+                 "preco":0,
+                 "imagem":"<center><img src='imagens/canadian.png' class='img-responsive center-block' alt='tabela'><center>"
                };
 //modelo para o painel inserido pelo usuário
 var painel1 =  { "potencia":0,
@@ -40,8 +39,9 @@ var painel1 =  { "potencia":0,
                 "Vmin":0,
                 "correnteSC":0,
                 "nome":"",
-                "preco":0
-              };
+                "preco":0,
+                "imagem":"<center><img src='imagens/yingli.png' class='img-responsive center-block' alt='painel'></center>"
+                };
 
 
 var painel255 =  { "potencia":255,
@@ -49,7 +49,8 @@ var painel255 =  { "potencia":255,
                     "Vmin":32.5,
                     "correnteSC":9,
                     "nome":"Canadian CSI CS6P-255P",
-                    "preco":875
+                    "preco":875,
+                    "imagem":"<center><img src='imagens/canadian.png' class='img-responsive center-block' alt='painel'></center>"
                   };
 
 var painel150 =  { "potencia":150,
@@ -57,7 +58,8 @@ var painel150 =  { "potencia":150,
                     "Vmin":32.5,
                     "correnteSC":8.61,
                     "nome":"Yingli Solar YL150P",
-                    "preco":415
+                    "preco":415,
+                    "imagem":"<center><img src='imagens/yingli.png' class='img-responsive center-block' alt='painel'></center>"
                   };
 
 //Modelo(classe) para o arranjo fotovolaico
@@ -69,6 +71,7 @@ var arranjo = { "numSerie":0,
                 "Imin":0, };
 //Modelo(classe) para o sistema fotovolaico
  var sistema = { "potencia":0,
+                 "potenciaNecessaria":0,
                  "diponibilidade":0,                //define o custo de disponibilidade do padrão de entrada [kWh]
                  "numPaineis":0,
                  "numInversores":1,
@@ -88,6 +91,32 @@ var arranjo = { "numSerie":0,
                  "energiaAnual":0                        //Energia produzida anualmente
                 };
 
+var tutorial = { "potenciaNecessaria":0,
+                "energiaMediaDiaria":0,                //define o custo de disponibilidade do padrão de entrada [kWh]
+                "difMensalDisponibilidade":0,
+                "difDiariaDisponibilidade":0,
+                "numPaineis":0,
+                "numInversores":1,
+                "TD":0.75,                         //Taxa de desempenho a priori é 0,75
+                "HSP":0,                           //Horas de Sol Pleno médias em Juiz de Fora. Medida em kWh/m² para um dia.
+                "consumoMensal":0,                 //Consumo médio Mensal em kWh
+                "consumoDiario":0,                 //Consumo médio diário em Wh
+                "MPPTativo":false,                 //Verifica está na faixa MPPT
+                "condicaoVmin":false,              //Verifica Vmin do arranjo com o Inversor
+                "condicaoVmax":false,              //Verifica Vmax do arranjo com o Inversor
+                "condicaoImax":false,              //Verifica Imax do arranjo com o Inversor
+                "condicaopotMaxEntrada":false,     //Verifica potencia do arranjo com o Inversor
+                "condicao":false,                  //Verifica se todos os requisitos estão corretos
+                "tester":false,                    //Variável teste
+                "precoTotal":0,                    //Preço do sistema
+                "energiaMensal":0,                        //Energia produzida mensalmente
+                "energiaAnual":0                        //Energia produzida anualmente
+               };
+
+
+
+
+
 //Modelo(classe) para o Inversor
 var inversor     = {  "potMaxEntrada":0,
                       "VmpptMin":0,
@@ -96,9 +125,10 @@ var inversor     = {  "potMaxEntrada":0,
                       "VMaxEntrada":0,
                       "VMinStart":0,
                       "preco":0,
+                      "imagem":"<center><img src='imagens/canadian.png' class='img-responsive center-block' alt='painel'></center>"
                    };
 
-var inversor260 = { "nome":"Microinversor i-Energy GT260 ",
+var inversor260 = { "nome":"Microinversor i-Energy GT260",
                     "potMaxEntrada":265,
                     "VmpptMin":30,
                     "VmpptMax":50,
@@ -106,6 +136,7 @@ var inversor260 = { "nome":"Microinversor i-Energy GT260 ",
                     "VMaxEntrada":59,
                     "VMinStart":25,
                     "preco":1700,
+                    "imagem":"<center><img src='imagens/inversor260.png' class='img-responsive center-block' alt='painel'></center>"
                   };
 
 var inversor1300 = { "nome":"Inversor SMA Sunny Boy SB 1300TL-10",
@@ -116,27 +147,30 @@ var inversor1300 = { "nome":"Inversor SMA Sunny Boy SB 1300TL-10",
                      "VMaxEntrada":600,
                      "VMinStart":120,
                      "preco":6290,
+                     "imagem":"<center><img src='imagens/inversor1300.png' class='img-responsive center-block' alt='painel'></center>"
                    };
 
 var inversor1500 = { "nome":"Inversor Fronius Galvo 1.5-1",
-                   "potMaxEntrada":1600,
-                   "VmpptMin":120,
-                   "VmpptMax":335,
-                   "correnteMax":13.3,
-                   "VMaxEntrada":420,
-                   "VMinStart":140,
-                   "preco":8200,
-                   };
+                     "potMaxEntrada":1600,
+                     "VmpptMin":120,
+                     "VmpptMax":335,
+                     "correnteMax":13.3,
+                     "VMaxEntrada":420,
+                     "VMinStart":140,
+                     "preco":8200,
+                     "imagem":"<center><img src='imagens/fronius.png' class='img-responsive center-block' alt='painel'></center>"
+                     };
 
 var inversor2000 = { "nome":"Inversor Fronius Galvo 2.0-1",
-                  "potMaxEntrada":2140,
-                  "VmpptMin":120,
-                  "VmpptMax":335,
-                  "correnteMax":17.8,
-                  "VMaxEntrada":420,
-                  "VMinStart":140,
-                  "preco":8400,
-                  };
+                      "potMaxEntrada":2140,
+                      "VmpptMin":120,
+                      "VmpptMax":335,
+                      "correnteMax":17.8,
+                      "VMaxEntrada":420,
+                      "VMinStart":140,
+                      "preco":8400,
+                      "imagem":"<center><img src='imagens/fronius.png' class='img-responsive center-block' alt='painel'></center>"
+                      };
 
 var inversor2500 = { "nome":"Inversor Fronius Galvo 2.5-1",
                    "potMaxEntrada":2650,
@@ -146,17 +180,19 @@ var inversor2500 = { "nome":"Inversor Fronius Galvo 2.5-1",
                    "VMaxEntrada":550,
                    "VMinStart":185,
                    "preco":8600,
+                   "imagem":"<center><img src='imagens/fronius.png' class='img-responsive center-block' alt='painel'></center>"
                    };
 
 var inversor3000 = { "nome":"Inversor Grid-tie Fronius Primo 3.0-1",
-                  "potMaxEntrada":3000,
-                  "VmpptMin":200,
-                  "VmpptMax":800,
-                  "correnteMax":20.7,
-                  "VMaxEntrada":1000,
-                  "VMinStart":80,
-                  "preco":8400,
-                  };
+                      "potMaxEntrada":3000,
+                      "VmpptMin":200,
+                      "VmpptMax":800,
+                      "correnteMax":20.7,
+                      "VMaxEntrada":1000,
+                      "VMinStart":80,
+                      "preco":8400,
+                      "imagem":"<center><img src='imagens/fronius.png' class='img-responsive center-block' alt='painel'></center>"
+                      };
 
 var inversor4000 = { "nome":"Inversor Fronius Primo 4.0-1",
                      "potMaxEntrada":4000,
@@ -166,6 +202,7 @@ var inversor4000 = { "nome":"Inversor Fronius Primo 4.0-1",
                      "correnteMax":12,
                      "VMinStart":80,
                      "preco":9300,
+                     "imagem":"<center><img src='imagens/fronius.png' class='img-responsive center-block' alt='painel'></center>"
                     };
 
 var inversor5000 = {  "nome":"Inversor Fronius Primo 5.0-1",
@@ -176,6 +213,7 @@ var inversor5000 = {  "nome":"Inversor Fronius Primo 5.0-1",
                       "correnteMax":12,
                       "VMinStart":80,
                       "preco":10300,
+                      "imagem":"<center><img src='imagens/fronius.png' class='img-responsive center-block' alt='painel'></center>"
                    };
 
 var inversor6000 = { "nome":"Inversor Fronius Primo 6.0-1",
@@ -186,6 +224,7 @@ var inversor6000 = { "nome":"Inversor Fronius Primo 6.0-1",
                      "correnteMax":18,
                      "VMinStart":80,
                      "preco":12000,
+                     "imagem":"<center><img src='imagens/fronius.png' class='img-responsive center-block' alt='painel'></center>"
                     };
 
 var inversor7000 = { "nome":"Inversor SMA Sunny MiniCentral SMC 7000HV-11",
@@ -196,6 +235,7 @@ var inversor7000 = { "nome":"Inversor SMA Sunny MiniCentral SMC 7000HV-11",
                       "correnteMax":23,
                       "VMinStart":400,
                       "preco":14400,
+                      "imagem":"<center><img src='imagens/inversor7000.png' class='img-responsive center-block' alt='painel'></center>"
                     };
 
 var inversor8000 = {  "nome":"Inversor Fronius IG Plus 100V-1",
@@ -206,9 +246,10 @@ var inversor8000 = {  "nome":"Inversor Fronius IG Plus 100V-1",
                       "correnteMax":37,
                       "VMinStart":260,
                       "preco":14400,
+                      "imagem":"<center><img src='imagens/inversor8000.png' class='img-responsive center-block' alt='painel'></center>"
                       };
 
-var inversor9000 = { "nome":"SMA SB 9000TLUS-10 Sunny Boy Grid Tie Inverter",
+var inversor9000 = { "nome":"Inversor SMA SB 9000TLUS-10 Sunny Boy Grid Tie",
                      "potMaxEntrada":11250,
                      "VmpptMin":300,
                      "VmpptMax":480,
@@ -216,6 +257,7 @@ var inversor9000 = { "nome":"SMA SB 9000TLUS-10 Sunny Boy Grid Tie Inverter",
                      "correnteMax":31,
                      "VMinStart":360,
                      "preco":16000,
+                     "imagem":"<center><img src='imagens/inversor9000.png' class='img-responsive center-block' alt='painel'></center>"
                      };
 
 //vetor com as potências disponíveis para inversores
@@ -305,6 +347,7 @@ function run(){
   sistema.consumoDiario = 1000*(sistema.consumoMensal-sistema.disponibilidade)/30;
   //calcula a potência para produzir a energia necessária
   potInteira = (sistema.consumoDiario/sistema.TD)/sistema.HSP;
+  sistema.potNecessaria = potInteira;
 
   if(potInteira>100000){
     alert("Ultrapassou o limite de potência para microgeração! Utilizar outros dados!");
@@ -337,6 +380,7 @@ function run(){
     }
   }
 
+
   console.log("------------------------------------------");
   console.log("Verificando arranjo...");
 
@@ -347,6 +391,7 @@ function run(){
   arranjo.numSerie = sistema.numPaineis;
   arranjo.Vmax = arranjo.numSerie*painel.Vmax;
   arranjo.Vmin = arranjo.numSerie*painel.Vmin;
+  arranjo.Imax = arranjo.numParalelo*painel.correnteSC;
 
   if(arranjo.Vmax<inversor.VmpptMax && arranjo.Vmin>inversor.VmpptMin){
     console.log("teste1:MPPT ativo! ");
@@ -380,8 +425,17 @@ function run(){
 
   //combinando o arranjo em série e paralelo
   if(!sistema.condicao){
+    sistema.condicaoImax = false;
+    sistema.condicaoVmax = false;
+    sistema.condicaoVmin = false;
+    sistema.MPPTativo = false;
+    sistema.condicaopotMaxEntrada = false;
+
     console.log("Verificando arranjo...");
     // aproximando para baixo
+    if(inversor.VMinStart>inversor.VmpptMin){
+      inversor.VmpptMin = inversor.VMinStart;
+    }
     arranjo.numSerie = Math.round( (inversor.VmpptMin/painel.Vmin) - 0.5) + 1;
     arranjo.numParalelo = Math.round(sistema.numPaineis/arranjo.numSerie);
     if( Math.round(sistema.numPaineis/arranjo.numSerie)<1 ){
@@ -418,6 +472,7 @@ function run(){
     arranjo.Imax = arranjo.numParalelo*painel.correnteSC;
     arranjo.Vmax = arranjo.numSerie*painel.Vmax;
     arranjo.Vmin = arranjo.numSerie*painel.Vmin;
+
     if(arranjo.Vmax<inversor.VmpptMax && arranjo.Vmin>inversor.VmpptMin){
       console.log("teste2:MPPT ativo!");
       sistema.MPPTativo = true;
@@ -428,7 +483,7 @@ function run(){
       sistema.condicaopotMaxEntrada = true;
     }
 
-    if(arranjo.Vmin>inversor.VMinStart){
+    if(arranjo.Vmin>=inversor.VMinStart){
       console.log("teste2:Tensão de inicialização ok!");
       sistema.condicaoVmin = true;
     }
@@ -440,11 +495,29 @@ function run(){
     if(arranjo.Imax<inversor.correnteMax){
       console.log("teste2:Corrente de entrada do inversor ok!");
       sistema.condicaoImax = true;
-    }
 
+    }
     if(sistema.MPPTativo && sistema.condicaopotMaxEntrada && sistema.condicaoVmin && sistema.condicaoVmax && sistema.condicaoImax ){
       sistema.condicao = true;
       console.log("teste2:casamento ok!");
+    }
+    if(!(sistema.MPPTativo && sistema.condicaopotMaxEntrada && sistema.condicaoVmin && sistema.condicaoVmax && sistema.condicaoImax )){
+      alert("Não foi possível fazer o dimensionamento com o painel selecionado!");
+      if(!sistema.MPPTativo){
+        alert("Fora da faixa do MPPT");
+      }
+      if(!sistema.condicaopotMaxEntrada){
+        alert("Potência do arranjo maior que a de entrada do Inversor");
+      }
+      if(!sistema.condicaoVmin){
+        alert("Tensão do arranjo menor que a tensão de entrada do Inversor");
+      }
+      if(!sistema.condicaoVmax){
+        alert("Tensão do arranjo maior que a tensão de entrada do Inversor");
+      }
+      if(!sistema.condicaoImax){
+        alert("Corrente do arranjo maior que a corrente de entrada do Inversor");
+      }
     }
 
   }
@@ -452,7 +525,7 @@ function run(){
 var numeroDeInversores = 0;
 var numeroDePaineis = 0;
   //Para o caso de pequenas potências -->>> Potencia Necessária < 533 W && (consumo - custo de disponibilidade) < 53
-  if( ((sistema.consumoMensal-sistema.disponibilidade) <= 57) || (sistema.numeroDePaineis<1) ) {
+  if( ((sistema.consumoMensal-sistema.disponibilidade) <= 57) || (sistema.numeroDePaineis<1) || potInteira<1000 ) {
 
       painel = painel255;
       inversor = inversor260;
@@ -461,6 +534,9 @@ var numeroDePaineis = 0;
         numeroDePaineis = 1;
       }
       numeroDeInversores = Math.round(potInteira / inversor.potMaxEntrada) ;
+      if(numeroDeInversores<1){
+        numeroDeInversores = 1;
+      }
       if (numeroDePaineis>3 || numeroDeInversores>3 ) {
         numeroDePaineis = 3;
         numeroDeInversores = 3;
@@ -499,36 +575,11 @@ var numeroDePaineis = 0;
   investimento.vpl = vpl(0.065,investimento.arrayCaixa);
   investimento.payback = payback(investimento.arrayCaixa-1,investimento.arrayCaixa);
   investimento.paybackDescontado = payback(investimento.arrayCaixaPresente-1,investimento.arrayCaixaPresente);
-
-
-
-  //------------Console------------------------------//
-
-  // console.log("------------------------------------------");
-  // console.log("Consumo Mensal: "+sistema.consumoMensal+" kWh");
-  // console.log("Consumo medio diario: "+sistema.consumoDiario+" Wh");
-  // console.log("Pot necessaria: "+potInteira+" W");
-  // console.log("Painel: "+painel.nome);
-  // console.log("Pot do painel: "+painel.potencia+" W");
-  // console.log("Num de paineis decimal: "+numPaineisDecimal);
-  // console.log("Num de paineis: "+ sistema.numPaineis);
-  // console.log("Paineis em serie: "+ arranjo.numSerie);
-  // console.log("Strings em paralelo: "+arranjo.numParalelo);
-  // console.log("Potencia do arranjo: "+ sistema.potencia+" W");
-  // console.log("Vmax do arranjo FV: "+arranjo.Vmax+" V");
-  // console.log("Vmin do arranjo FV: "+arranjo.Vmin+" V");
-  // console.log("Na faixa MPPT("+inversor.VmpptMin+"V - "+inversor.VmpptMax+" V): "+sistema.MPPTativo);
-  // console.log("Sistema ok:"+sistema.condicao);
-  // console.log("Inversor: "+inversor.nome);
-  // console.log("Max pot entrada inversor: "+inversor.potMaxEntrada+"W");
-  // console.log("Custo paineis: R$"+sistema.numPaineis*painel.preco);
-  // console.log("Custo Inversor: R$"+inversor.preco);
-  // console.log("Custo total: R$"+sistema.precoTotal);
-  // console.log("Energia produzida mensal média: "+sistema.energiaMensal+"kWh");
 }
 
 function clean(){
   sistema.condicaopotMaxEntrada = false;
+  sistema.potNecessaria = 0;
   sistema.condicaoVmin = false;
   sistema.condicaoVmax = false;
   sistema.condicaoImax = false;
@@ -718,7 +769,13 @@ function payback(numOfPeriods, cfs) {
   }
 };
 
-
+var $doc = $('html, body');
+$('.scrollSuave').click(function() {
+    $doc.animate({
+        scrollTop: $( $.attr(this, 'href') ).offset().top
+    }, 500);
+    return false;
+});
 
 
 
@@ -727,50 +784,149 @@ $("#go").click(function(){
     $("#div2").fadeIn("slow");
 });
 
+$("#button-tutorial").click(function(){
+  $("#sistema-intro").html("<br>Para projetar o sistema é necessário saber o consumo de energia e a quantidade de energia solar no local da instalação. Dessa maneira, utilizaremos os valores do consumo mensal médio e da irradiação.</br>");
+  $("#sistema-intro2").html("<br>Potência necessária = [(Energia média diária) / (Taxa de desempenho do sistema)] / (horas de sol pleno)</br> <br>Potência necessária = ("+(((sistema.consumoMensal-sistema.disponibilidade)/30)*1000).toFixed(2)+"/"+sistema.TD+") / ("+sistema.HSP+") = "+sistema.potNecessaria.toFixed(2)+"W </br>");
+
+
+});
+
 $("#button-sistema").click(function(){
+  $("#sistema-intro").html("<br>Para projetar o sistema é necessário saber o consumo de energia e a quantidade de energia solar no local da instalação. Dessa maneira, utilizaremos os valores do consumo mensal médio e da irradiação.</br>");
+  $("#sistema-intro2").html("<br>Potência necessária = [(Energia média diária) / (Taxa de desempenho do sistema)] / (horas de sol pleno) = ("+(((sistema.consumoMensal-sistema.disponibilidade)/30)*1000).toFixed(2)+"/"+sistema.TD+") / ("+sistema.HSP+") = "+sistema.potNecessaria.toFixed(2)+"W </br>");
   $("#consumo-mensal").html("<br>Consumo Mensal: "+sistema.consumoMensal+" kWh </br>");
   $("#consumo-diario").html("<br>Consumo médio diário: "+sistema.consumoDiario.toFixed(2)+ "Wh </br>");
   $("#horas-de-sol").html("<br>Horas de Sol Pleno: "+sistema.HSP+" kWh/m².dia </br>");
   if(sistema.numInversores==1){
     $("#pot-necessaria").html("<br>Potência necessária: "+potInteira.toFixed(2)+"W</br>");
   }
-  if(sistema.numInversores==3){
-    potInteira = potInteira*3;
+  if(sistema.numInversores==2){
     $("#pot-necessaria").html("<br>Potência necessária: "+potInteira.toFixed(2)+"W</br>");
   }
-  $("#pot-necessaria").html("<br>Potência necessária: "+potInteira.toFixed(2)+"W</br>");
-  $("#pot-necessaria").html("<br>Potência necessária: "+potInteira.toFixed(2)+"W</br>");
+  if(sistema.numInversores==3){
+    potInteira = potInteira*3;
+    if(inversor.nome=="Microinversor i-Energy GT260"){
+      potInteira = potInteira/3;
+    }
+    $("#pot-necessaria").html("<br>Potência necessária: "+potInteira.toFixed(2)+"W</br>");
+  }
   $("#pot-sistema").html("<br>Potência do sistema: "+sistema.potencia.toFixed(2)+"W</br>");
 });
 
 $("#button-arranjo").click(function(){
+  $("#numero-paineis").html("<br>Número total de painéis: "+sistema.numPaineis+"</br>");
   if(sistema.numInversores==1){
-    $("#numero-inversores1").html("<br>Será necessário "+sistema.numInversores+" inversor, no qual deverá ser conectado em sua entrada o seguinte arranjo de painéis.</br>");
+    $("#numero-inversores1").html("<br>Será necessário "+sistema.numInversores+" inversor, no qual deverá ser conectado em sua entrada o seguinte arranjo de painéis:</br>");
     $("#numero-inversores3").html("");
   }
-  if(sistema.numInversores==3){
-    $("#numero-inversores3").html("<br>Serão necessários "+sistema.numInversores+" inversores. Para cada inversor deverá ser conectado na entrada o seguinte arranjo de painéis.</br>");
+  if(sistema.numInversores>1){
+    $("#numero-inversores3").html("<br>Serão necessários "+sistema.numInversores+" inversores. Para cada inversor deverá ser conectado na entrada o seguinte arranjo de painéis:</br>");
     $("#numero-inversores1").html("");
   }
-  $("#numero-paineis").html("<br>Número de painéis: "+sistema.numPaineis+"</br>");
   $("#paineis-serie").html("<br>Painéis em série: "+ arranjo.numSerie+"</br>");
   $("#paineis-paralelo").html("<br>Strings em paralelo: "+arranjo.numParalelo+"</br>");
   $("#pot-arranjo").html("<br>Potência do arranjo: "+sistema.potenciaW+"</br>");
-  $("#v-max").html("<br>Vmax do arranjo FV: "+arranjo.Vmax+"V</br>");
-  $("#v-min").html("<br>Vmin do arranjo FV: "+arranjo.Vmin+"V</br>");
+  $("#v-max").html("<br>Vmax do arranjo FV: "+arranjo.Vmax.toFixed(2)+"V</br>");
+  $("#v-min").html("<br>Vmin do arranjo FV: "+arranjo.Vmin.toFixed(2)+"V</br>");
   $("#corrente-arranjo").html("<br>Corrente do arranjo FV: "+painel.correnteSC*arranjo.numParalelo+"A</br>");
-
-});
-
-$("#button-equipamento").click(function(){
   $("#painel-nome").html("<br>Painel: "+painel.nome+" W </br>");
+  $("#painel-imagem").html(painel.imagem);
   $("#potencia-painel").html("<br>Potência do painel: "+painel.potencia+" W </br>");
   $("#vmax-painel").html("<br>Tensão máxima: "+painel.Vmax+ "V </br>");
   $("#vmin-painel").html("<br>Tensão mínima: "+painel.Vmin+ "V </br>");
   $("#corrente-painel").html("<br>Corrente de curto circuito: "+painel.correnteSC+ "V </br>");
-  $("#inversor-nome").html("<br>Inversor: "+inversor.nome+"</br>");
+  $("#inversor-nome").html("<br>"+inversor.nome+"</br>");
+  $("#inversor-imagem").html(inversor.imagem);
+  $("#inversor-max-pot-entrada").html("<br>Potência máxima de entrada: "+inversor.potMaxEntrada+" W</br>");
+  $("#inversor-tensao-max-entrada").html("<br>Tensão máxima de entrada: "+inversor.VMaxEntrada+" V</br>");
   $("#inversor-mppt").html("<br>Faixa MPPT: "+inversor.VmpptMin+"V ~ "+ inversor.VmpptMax+" V </br>");
+  $("#tensao-min-inicializacao").html("<br>Tensão mínima para inicialização: "+inversor.VMinStart+" V </br>");
   $("#inversor-corrente-entrada").html("<br>Corrente máxima de entrada: "+inversor.correnteMax+" A </br>");
+});
+
+$("#button-tutorial").click(function(){
+  $("#tutorial-intro").html("<br>Para projetar o sistema é necessário saber o consumo de energia elétrica e a quantidade de energia solar no local da instalação. Dessa maneira, utilizaremos os valores do consumo mensal médio e da irradiação.</br>");
+  $("#tutorial-hsp").html("<br>Energia solar = Horas de sol pleno = "+sistema.HSP+"kWh/m².dia</br>");
+  $("#tutorial-consumo-mensal").html("<br>Consumo de energia médio mensal = "+sistema.consumoMensal+"kWh</br>");
+  if(sistema.disponibilidade == 30){
+    tutorial.difMensalDisponibilidade = sistema.consumoMensal - sistema.disponibilidade;
+    $("#tutorial-custo-disponibilidade").html("<br>Deve-se pagar o custo de disponibilidade da rede elétrica, condição necessária para participar do sistema de compensação. Como o padrão dessa instalação é monofásico, o custo de disponibilidade é "+sistema.disponibilidade+"kWh.</br><br>Sendo assim, para não gerar energia em excesso, o ideal é retirar do consumo mensal esse valor, uma vez que o custo de disponibilidade é o valor mínimo de energia que é pago à concessionária. Portanto:</br><br>Diferença = Consumo Mensal - Custo de disponibilidade = "+sistema.consumoMensal+"kWh -"+sistema.disponibilidade+" kWh</br><br>Diferença da média mensal = "+tutorial.difMensalDisponibilidade+" kWh</br>");
+  }
+  if(sistema.disponibilidade == 50){
+    tutorial.difMensalDisponibilidade = sistema.consumoMensal - sistema.disponibilidade;
+    $("#tutorial-custo-disponibilidade").html("<br>Deve-se pagar o custo de disponibilidade da rede elétrica, condição necessária para participar do sistema de compensação. Como o padrão dessa instalação é bifásico, o custo de disponibilidade é "+sistema.disponibilidade+"kWh.</br><br>Sendo assim, para não gerar energia em excesso, o ideal é retirar do consumo mensal esse valor, uma vez que o custo de disponibilidade é o valor mínimo de energia que é pago à concessionária. Portanto:</br><br>Diferença = Consumo Mensal - Custo de disponibilidade = "+sistema.consumoMensal+"kWh -"+sistema.disponibilidade+" kWh</br><br>Diferença da média mensal = "+tutorial.difMensalDisponibilidade+" kWh</br>");
+  }
+  if(sistema.disponibilidade == 100){
+    tutorial.difMensalDisponibilidade = sistema.consumoMensal - sistema.disponibilidade;
+    $("#tutorial-custo-disponibilidade").html("<br>Deve-se pagar o custo de disponibilidade da rede elétrica, condição necessária para participar do sistema de compensação. Como o padrão dessa instalação é trifásico, o custo de disponibilidade é "+sistema.disponibilidade+"kWh.</br><br>Sendo assim, para não gerar energia em excesso, o ideal é retirar do consumo mensal esse valor, uma vez que o custo de disponibilidade é o valor mínimo de energia que é pago à concessionária. Portanto:</br><br>Diferença = Consumo Mensal - Custo de disponibilidade = "+sistema.consumoMensal+"kWh -"+sistema.disponibilidade+" kWh</br><br>Diferença da média mensal = "+tutorial.difMensalDisponibilidade+" kWh</br>");
+  }
+  $("#tutorial-intro-diaria").html("<br>Como as horas de sol pleno são dadas para um dia, devemos passar a diferença da média mensal para a média diária. Desse modo, obtemos: </br>");
+  tutorial.difDiariaDisponibilidade = tutorial.difMensalDisponibilidade/30;
+  tutorial.difDiariaDisponibilidade = tutorial.difDiariaDisponibilidade.toFixed(2);
+  $("#tutorial-consumo-diario").html("<br>Consumo médio diário = Diferença da média mensal / (30 dias)</br><br>Consumo médio diário = "+tutorial.difMensalDisponibilidade+"kWh/(30)</br><br>Consumo médio diário = "+tutorial.difMensalDisponibilidade+"*(1000)Wh/(30)</br><br>Consumo médio diário = "+sistema.consumoDiario.toFixed(2)+"Wh</br>" );
+  $("#tutorial-TD").html("<br>Além disso, devemos considerar a taxa de desempenho do sistema. Essa é equivalente ao rendimento de todo o sistema e leva em consideração as eventuais perdas dos equipamentos e os efeitos ambientais externos que influenciam na produção de energia. (Valor padrão entre 0.7 e 0.8)</br><br>Taxa de Desempenho = "+sistema.TD+"</br>");
+  $("#tutorial-pot-necessaria").html("<br>Com esse valores podemos estimar a potência necessária para abater o consumo de energia elétrica. Basta utilizar a seguinte relação:</br><br>Potência necessária = [(Energia média diária) / (Taxa de desempenho do sistema)] / (horas de sol pleno)</br> <br>Potência necessária = ("+(((sistema.consumoMensal-sistema.disponibilidade)/30)*1000).toFixed(2)+"/"+sistema.TD+") / ("+sistema.HSP+") = "+sistema.potNecessaria.toFixed(2)+"W </br>");
+  $("#tutorial-dimensionamento-intro").html("<br>A partir desse valor poderemos dimensionar os esquipamentos que compõe o sistema conectado à rede, sendo os principais os painéis e o inversor.</br>");
+  if(sistema.potNecessaria>=10000){
+    $("#tutorial-dimensionamento-10000").html("<br>Como a potência necessária é maior que 10000 kW, serão necessários mais que um inversor para a conexão com a rede elétrica. Uma vez que os painéis geram energia CC, enquanto a rede trabalha em regime CA. Sendo assim, trabalharemos com 3 inversores.</br><img src='imagens/forma.png' class='img-responsive center-block' alt='tabela'>");
+    $("#tutorial-dimensionamento-10000-potencia").html("<br>Logo, a potência necessária será dividida por 3 e será distribuida para cada inversor. Desse jeito, a potência para cada inversor é:</br><br>Potência para cada inversor = Potência necessária / 3</br><br>Potência para cada inversor = "+(sistema.potNecessaria.toFixed(2))+"W/3</br><br>Potência para cada inversor = "+potInteira.toFixed(2)+"W</br>");
+    $("#tutorial-dimensionamento-10000-inversor").html("<br>Com base nesse valor, deve-se procurar um inversor com a potência nominal próxima. Portanto, escolheu-se o "+inversor.nome+", que possui como potência máxima de entrada: "+inversor.potMaxEntrada+"W</br>");
+    $("#tutorial-dimensionamento").html("");
+    $("#tutorial-dimensionamento-potencia").html("");
+    $("#tutorial-dimensionamento-inversor").html("");
+    $("#tutorial-dimensionamento-gt260").html("");
+    $("#tutorial-dimensionamento-gt260-potencia").html("");
+  }
+  if(sistema.potNecessaria<10000 && sistema.numInversores==1){
+    $("#tutorial-dimensionamento-10000").html("");
+    $("#tutorial-dimensionamento-10000-potencia").html("");
+    $("#tutorial-dimensionamento-10000-inversor").html("");
+    $("#tutorial-dimensionamento-gt260").html("");
+    $("#tutorial-dimensionamento-gt260-potencia").html("");
+    $("#tutorial-dimensionamento").html("<br>Como a potência necessária é menor que 10000 kW, será preciso somente um inversor para a conexão com a rede elétrica[norma ANEEL]. Lembrando que os painéis geram energia CC, enquanto a rede trabalha em regime CA.</br><img src='imagens/forma.png' class='img-responsive center-block' alt='tabela'>");
+    $("#tutorial-dimensionamento-potencia").html("");
+    $("#tutorial-dimensionamento-inversor").html("<br>Com base no valor da potência necessária, deve-se procurar um inversor com a potência nominal próxima. Portanto, escolheu-se o "+inversor.nome+", que possui como potência máxima de entrada: "+inversor.potMaxEntrada+"W</br>");
+  }
+  if(inversor.nome == "Microinversor i-Energy GT260"){
+    if(sistema.numInversores>1){
+      $("#tutorial-dimensionamento-10000").html("");
+      $("#tutorial-dimensionamento-10000-potencia").html("");
+      $("#tutorial-dimensionamento-10000-inversor").html("");
+      $("#tutorial-dimensionamento").html("");
+      $("#tutorial-dimensionamento-potencia").html("");
+      $("#tutorial-dimensionamento-inversor").html("");
+      $("#tutorial-dimensionamento-gt260").html("<br>Neste caso, serão necessários mais que um inversor para a conexão com a rede elétrica. Considerando que os painéis geram energia CC, enquanto a rede trabalha em regime CA. Esse caso, em especial requer um inversor de baixa potência, pois o consumo é muito baixo.</br><img src='imagens/forma.png' class='img-responsive center-block' alt='tabela'>");
+      $("#tutorial-dimensionamento-gt260-potencia").html("<br>A potência necessária será dividida pela potência do inversor de 265W. Desse jeito, serão utilizados "+sistema.numInversores+" inversores, modelo "+inversor.nome+", o que dará uma potência de "+sistema.numInversores*inversor.potMaxEntrada+" W</br>");
+    }
+    if(sistema.numInversores==1){
+      $("#tutorial-dimensionamento-10000").html("");
+      $("#tutorial-dimensionamento-10000-potencia").html("");
+      $("#tutorial-dimensionamento-10000-inversor").html("");
+      $("#tutorial-dimensionamento").html("");
+      $("#tutorial-dimensionamento-potencia").html("");
+      $("#tutorial-dimensionamento-inversor").html("");
+      $("#tutorial-dimensionamento-gt260-potencia").html("");
+      $("#tutorial-dimensionamento-gt260").html("<br>Utilizaremos um inversor de baixa potência, pois o consumo é muito baixo. A potência necessária será próxima da potência do inversor que é de 260W. Desse jeito, será utilizado "+sistema.numInversores+" inversor, modelo: "+inversor.nome+"</br>");
+    }
+  }
+  $("#tutorial-dimensionamento-numero-paineis-1").html("<br>O número de painéis desse sistema é determinado a partir da potência que o consumo demanda. Como a potência exigida pelo consumo é "+sistema.potNecessaria.toFixed(2)+"W, e a potência do painel é "+painel.potencia+" W pode-se fazer uma estimativa do número de painéis necessários.</br><br>Número de paineis = Potência necessária no consumo / Potência nominal do Painel</br><br>Número de paineis  = "+sistema.potNecessaria.toFixed(2)+"W / "+painel.potencia+"W </br><br>Número de paineis  = "+(sistema.potNecessaria/painel.potencia).toFixed(2)+"</br>");
+  $("#tutorial-dimensionamento-numero-paineis-2").html("<br>Neste caso foi escolhido utilizar "+sistema.numPaineis+" painéis, gerando uma potência nominal de ("+sistema.numPaineis+"*"+painel.potencia+"W) = "+sistema.potencia+"W </br>");
+  $("#tutorial-dimensionamento-arranjo").html("<br>Agora basta determinar a ligação(série ou paralelo) entre os painéis, a arquitetura será determinada a partir dos parâmetros de entrada do inversor.</br>");
+  $("#tutorial-dimensionamento-arranjo-inversor").html("<br>Ao buscar no datasheet encontram-se os dados de entrada do inversor:</br><br>"+inversor.nome+"</br><br>"+inversor.imagem+"</br><br>Potência máxima de entrada: "+inversor.potMaxEntrada+" W</br><br>Tensão máxima de entrada: "+inversor.VMaxEntrada+" V</br><br>Faixa MPPT: "+inversor.VmpptMin+"V ~ "+ inversor.VmpptMax+" V </br><br>Tensão mínima para inicialização: "+inversor.VMinStart+" V </br><br>Corrente máxima de entrada: "+inversor.correnteMax+" A </br>");
+  $("#tutorial-dimensionamento-arranjo-painel").html("<br>Deve-se também buscar os valores de tensão e corrente produzidos pelo painel escolhido. No datasheet encontram-se os dados: </br><br>Modelo: "+painel.nome+"</br><br>"+painel.imagem+"</br><br>Potência: "+painel.potencia+" W</br><br>Tensão máxima: "+painel.Vmax+" V</br><br>Tensão mínima: "+painel.Vmin+" V</br><br>Corrente de curto circuito: "+painel.correnteSC+" A</br>");
+  if(sistema.numInversores<=1){
+    $("#tutorial-dimensionamento-arranjo-2").html("<br>Visando estar dentro da faixa de operação MPPT do inversor e respeitando os limites de potência, tensão e corrente. Optou-se por conectar na entrada do inversor:</br><br>Painéis em série: "+arranjo.numSerie+"</br><br>Strings em paralelo: "+arranjo.numParalelo+"</br><img src='imagens/paineis.png' class='img-responsive center-block' alt='tabela'>");
+  }
+  if(sistema.numInversores>1){
+    $("#tutorial-dimensionamento-arranjo-2").html("<br>Visando estar dentro da faixa de operação MPPT do inversor e respeitando os limites de potência, tensão e corrente. Optou-se por conectar na entrada de cada um dos "+sistema.numInversores+" inversores:</br><br>Painéis em série: "+arranjo.numSerie+"</br><br>Strings em paralelo: "+arranjo.numParalelo+"</br><img src='imagens/paineis.png' class='img-responsive center-block' alt='tabela'><br>Totalizando "+sistema.numPaineis+" painéis.</br><br>(Número painéis série * número de cadeias paralelo * número de inversores)</br><br>("+arranjo.numSerie+" * "+arranjo.numParalelo+" * "+sistema.numInversores+") = "+sistema.numPaineis+"</br>");
+  }
+  $("#tutorial-dimensionamento-arranjo-3").html("<br> Desse modo, no arranjo:</br><br>Tensão máxima  = Tensão máxima do painel * Número de paineis em série </br><br>Tensão máxima  = "+arranjo.Vmax.toFixed(2)+" V </br><br>Tensão mínima = Tensão mínima do painel * Número de paineis em série </br><br>Tensão mínima = "+arranjo.Vmin.toFixed(2)+" V</br><br>Corrente máxima = Corrente de curto circuito do painel * Número de Strings em paralelo</br><br>Corrente máxima = "+arranjo.Imax+" A</br><br>Potência de entrada = Potência do painel * número de painéis em série * número de Strings em paralelo </br><br>Potência de entrada = "+arranjo.numSerie*arranjo.numParalelo*painel.potencia+" W</br>");
+  var energiaDiaria = sistema.potencia*sistema.HSP*sistema.TD;
+  $("#tutorial-energia-diaria").html("<br>A energia diária média produzida por esse sistema é calculada utilizando:</br><br>Energia diária = Potência do sistema * Horas de Sol Pleno * Taxa de Desempenho do sistema</br><br>Energia diária = "+sistema.potencia+" * "+sistema.HSP+" * "+sistema.TD+"</br><br>Energia diária = "+energiaDiaria.toFixed(2)+" Wh</br>");
+  $("#tutorial-energia-mensal").html("<br>Logo:</br><br>Energia mensal média = 30 * Energia diária </br><br>Energia mensal média = 30*"+energiaDiaria.toFixed(2)+" Wh</br><br>Energia mensal média = "+sistema.energiaMensal.toFixed(2)+" kWh</br>");
+  $("#tutorial-energia-anual").html("<br>Energia anual média = 365 * Energia diária </br><br>Energia anual média = 365*"+energiaDiaria.toFixed(2)+" Wh</br><br>Energia anual média = "+sistema.energiaAnual.toFixed(2)+" kWh</br>");
+  $("#tutorial-financeiro").html("<br>A receita economizada com o sistema fotovolaico em um ano é dada pela tarifa de energia e pela produção média anual de energia. Desse modo: </br><br>Receita = Energia anual média * Tarifa de energia</br><br>Receita = "+sistema.energiaAnual.toFixed(2)+" * R$"+investimento.tarifa+" = R$"+investimento.tarifa*sistema.energiaAnual+"</br>");
+  $("#tutorial-financeiro-2").html("<br>Para a realização da análise de investimentos foi considerado um período de vida útil do sistema de 25 anos, a taxa mínima de atratividade escolhida foi de "+investimento.tima*100+"% ao ano, levando em conta o decaimento de produção de energia dos painéis de "+investimento.decaimentoPainel*100+"% ao ano, além da taxa de correção da tarifa de energia de "+investimento.ajusteTarifa*100+"% ao ano.</br>");
 });
 
 $("#button-analise").click(function(){
@@ -786,3 +942,24 @@ $("#button-analise").click(function(){
 });
 
 // $("#pot-sistema").html("<br>Na faixa MPPT("+inversor.VmpptMin+"V - "+inversor.VmpptMax+" V):"+ +"</br>");
+
+//código para a rolagem rápida no tutorial
+var $doc = $('html, body');
+
+// $('.scrollSuave').click(function() {
+//     $("#myModalEquipamentos").animate({
+//       //scrollTop: $( $.attr(this, 'href') ).offset().top
+//       scrollTop: 400
+//     }, 500);
+//     //return false;
+// });
+
+
+//$("#myModalEquipamentos").animate({"scrollTop": 00}, 400)
+// function teste222() {
+//     $doc.animate({
+//         scrollTop: $("#determinacao-demanda").offset().top
+//     }, 500);
+//     return false;
+// };
+//$("#myModalEquipamentos").animate({"scrollTop": 00}, 400)
