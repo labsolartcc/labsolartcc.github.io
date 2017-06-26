@@ -106,7 +106,8 @@ var tutorial = { "potenciaNecessaria":0,
                 "condicaoVmax":false,              //Verifica Vmax do arranjo com o Inversor
                 "condicaoImax":false,              //Verifica Imax do arranjo com o Inversor
                 "condicaopotMaxEntrada":false,     //Verifica potencia do arranjo com o Inversor
-                "condicao":false,                  //Verifica se todos os requisitos estão corretos
+                "tma":0,                           //Taxa minima de atratividade
+                "decaimentoPainel":0,
                 "tester":false,                    //Variável teste
                 "precoTotal":0,                    //Preço do sistema
                 "energiaMensal":0,                        //Energia produzida mensalmente
@@ -926,7 +927,9 @@ $("#button-tutorial").click(function(){
   $("#tutorial-energia-mensal").html("<br>Logo:</br><br>Energia mensal média = 30 * Energia diária </br><br>Energia mensal média = 30*"+energiaDiaria.toFixed(2)+" Wh</br><br>Energia mensal média = "+sistema.energiaMensal.toFixed(2)+" kWh</br>");
   $("#tutorial-energia-anual").html("<br>Energia anual média = 365 * Energia diária </br><br>Energia anual média = 365*"+energiaDiaria.toFixed(2)+" Wh</br><br>Energia anual média = "+sistema.energiaAnual.toFixed(2)+" kWh</br>");
   $("#tutorial-financeiro").html("<br>A receita economizada com o sistema fotovolaico em um ano é dada pela tarifa de energia e pela produção média anual de energia. Desse modo: </br><br>Receita = Energia anual média * Tarifa de energia</br><br>Receita = "+sistema.energiaAnual.toFixed(2)+" * R$"+investimento.tarifa+" = R$"+investimento.tarifa*sistema.energiaAnual+"</br>");
-  $("#tutorial-financeiro-2").html("<br>Para a realização da análise de investimentos foi considerado um período de vida útil do sistema de 25 anos, a taxa mínima de atratividade escolhida foi de "+investimento.tima*100+"% ao ano, levando em conta o decaimento de produção de energia dos painéis de "+investimento.decaimentoPainel*100+"% ao ano, além da taxa de correção da tarifa de energia de "+investimento.ajusteTarifa*100+"% ao ano.</br>");
+  tutorial.tma = investimento.tma*100;
+  tutorial.decaimentoPainel = investimento.decaimentoPainel*100
+  $("#tutorial-financeiro-2").html("<br>Para a realização da análise de investimentos foi considerado: </br><br>Período de vida útil do sistema de 25 anos.</br><br>Taxa mínima de atratividade escolhida foi de "+tutorial.tma.toFixed(2)+"% ao ano.[O valor de 6.50% equivale a um rendimento de poupança] </br><br>Decaimento de produção de energia dos painéis de "+tutorial.decaimentoPainel.toFixed(2)+"% ao ano.</br><br>Taxa de correção da tarifa de energia elétrica de "+investimento.ajusteTarifa*100+"% ao ano.</br><br>O custo da estrutura de suporte dos painéis foi estimado em R$"+investimento.precoEstrutura.toFixed(2)+" por Watt de potência instalada.</br><br>O custo de cabeamento e proteção do sistema foi estimado em R$"+investimento.precoCabeamento.toFixed(2)+" por Watt de potência instalada.</br><br>Em caso de problemas ou desejo de adicionar algum equipamento no banco de dados envie email para: <strong>solano.aguirre@engenharia.ufjf.br</strong></br>");
 });
 
 $("#button-analise").click(function(){
