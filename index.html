@@ -3,19 +3,416 @@
   <head>
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/basic.css" rel="stylesheet">
     <meta charset="utf-8">
-    <title>TCC Projeto Fotovoltaico</title>
+    <title>Projeto Fotovoltaico</title>
   </head>
-  <body>
-    <br>Consumo mensal [kWh]: <input type="text" id="consumo" ></br>
-    <br>Irradiação | Horas de Sol Pleno [kWh/m².dia]: <input type="text" id="hsp"></br>
-    <br><button class="btn btn-info btn-responsive" onclick="getInputs()">Enviar</button> </br>
+  <body class="container-fluid">
+      <a  href="http://www.ufjf.br/labsolar/" target="_blank"><img src="imagens/labsolar.jpg" class="img-responsive center-block" alt="labsolarLogo"></a>
+      <br>
+      <div class="row">
+            <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">Consumo mensal</span>
+                <input type="text" class="form-control" placeholder="kWh" aria-describedby="sizing-addon1" id="consumo">
+              </div>
+            </div>
+            <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">?</button>
+            </div>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Consumo mensal</h4>
+                    </div>
+                    <div class="modal-body">
+                      <br> O consumo mensal deve ser estimado a partir da média de todos os consumos.</br>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          <div class="hsp">
+            <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon2">Irradiação</span>
+                <input type="text" class="form-control" placeholder="kWh/m².dia" aria-describedby="sizing-addon1" id="hsp">
+              </div>
+            </div>
+            <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">?</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Irradiação | Horas de Sol Pleno [kWh/m².dia]</h4>
+                  </div>
+                  <div class="modal-body">
+                    <br>As horas de sol pleno podem ser obtidas clicando <a target="_blank" href="http://www.cresesb.cepel.br/index.php#data">aqui</a>.</br>
+                    <br>Na aba Potêncial Energético acessar: Potencial Solar.</br>
+                    <br><img src="imagens/potencialsolar.jpg" alt="Potencial Solar"></br>
+                    <br>No Sun Data, colocar as coordenadas do local de instalação:</br>
+                    <br><img src="imagens/coordenada.jpg" alt="coordenadas gps"></br>
+                    <br>Escolher a região mais próxima e pegar a maior média:</br>
+                    <br><img src="imagens/hsp.jpg" alt="Horas de Sol Pleno"></br>
+                    <br>Inserir o valor decimal utilizando ponto ao invés de vírgula.</br>
+                    <br>No exemplo acima, utilizar 4.34</br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">Tarifa de energia</span>
+            <input type="text" class="form-control" placeholder="R$/kWh" aria-describedby="sizing-addon1" id="tarifa">
+          </div>
+        </div>
+        <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalTarifa">?</button>
+        </div>
+          <!-- Modal -->
+          <div class="modal fade" id="myModalTarifa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Tarifa de energia</h4>
+                </div>
+                <div class="modal-body">
+                  <br> Preço pago pelo kWh em sua residência.</br>
+                  <br> Ao inserir o dado, utilizar . ao invés de , </br>
+                  <br>Exemplo: R$/kWh = 0,80; Inserir: 0.80</br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon2">Taxa mínima de atratividade</span>
+              <input type="text" class="form-control" placeholder="% ao ano" aria-describedby="sizing-addon1" id="tma">
+            </div>
+          </div>
+          <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalTma">?</button>
+          </div>
+            <!-- Modal -->
+            <div class="modal fade" id="myModalTma" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Taxa mínima de atratividade</h4>
+                  </div>
+                  <div class="modal-body">
+                    <br>Informações acerCa da TMA.</br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <br>
+      <div class="row">
+      <div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Padrão de entrada<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <!-- alocar painel1 -->
+            <li><a href="#" onclick="custoDisponibilidade('mono')">Monofásico</a></li>
+            <!-- alocar painel2 -->
+            <li><a href="#" onclick="custoDisponibilidade('bi')">Bifásico</a></li>
+            <!-- alocar painel3 -->
+            <li><a href="#" onclick="custoDisponibilidade('tri')">Trifásico</a></li>
+          </ul>
+        </div>
+      </div>
+    <!-- <div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Painel<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"> -->
+          <!-- alocar painel1 -->
+          <!-- <li><a href="#" onclick="choosePainel(painel255)">255W</a></li> -->
+          <!-- alocar painel2 -->
+          <!-- <li><a href="#" onclick="choosePainel(painel150)">150W</a></li>
+          <li role="separator" class="divider"></li>
+          <li> -->
+            <!-- Button trigger modal -->
+            <!-- <a data-toggle="modal" data-target="#myModalPainelinserido">Inserir seu painel</a>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+  </br>
+    <div><button class="btn btn-info btn-responsive"  id="go1" onclick="getInputs()">Enviar</button></div><br>
+          <div id="div3" style="display:none" >
+            <div class="row">
+              <div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+                <div id="potencia-necessaria">
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuPainel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Painel<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuPainel">
+                    <!-- alocar painel1 -->
+                    <li><a href="#" onclick="choosePainel(painel255)">255W</a></li>
+                    <!-- alocar painel2 -->
+                    <li><a href="#" onclick="choosePainel(painel150)">150W</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                      <!-- Button trigger modal -->
+                      <a data-toggle="modal" data-target="#myModalPainelinserido">Inserir seu painel</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon2">Preço unitário do painel</span>
+                    <input type="text" class="form-control" placeholder="R$" aria-describedby="sizing-addon1" id="preco-painel">
+                  </div>
+             </div>
+          </div>
+          <br>
+            <div class="row">
+              <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuInversor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Inversor<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" id="dropdown-inversor" aria-labelledby="dropdownMenuInversor">
+                    <!-- alocar inversor -->
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon2">Preço unitário do inversor</span>
+                    <input type="text" class="form-control" placeholder="R$" aria-describedby="sizing-addon1" id="preco-inversor">
+                  </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon2">Custo com estrutura</span>
+                    <input type="text" class="form-control" placeholder="R$" aria-describedby="sizing-addon1" id="preco-estrutura">
+                  </div>
+              </div>
+              <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon2">Custo com cabeamento</span>
+                    <input type="text" class="form-control" placeholder="R$" aria-describedby="sizing-addon1" id="preco-cabeamento">
+                  </div>
+              </div>
+              <div class="col-xs-2 col-md-2 col-sm-2 col-lg-2">
+                <button class="btn btn-info btn-responsive"  id="go" onclick="run()">Continuar</button>
+              </div>
+            </div>
+            <br>
+              <div class="row">
+                <div class="col-xs-2 col-md-2 col-sm-2 col-lg-2">
+                  <button class="btn btn-info btn-responsive"  id="go" onclick="reload()">Limpar</button>
+                </div>
+              </div>
+            <br>
+    <!-- <div id="div1" style="display:none" class="row"><button id="button-sistema" class="btn res btn-danger btn-responsive col-xs-6 col-md-6 col-sm-12 col-lg-6" data-toggle="modal" data-target="#myModalSistema">Sistema</button><button  id="button-arranjo" class="res btn btn-warning btn-responsive col-xs-6 col-md-6 col-sm-12 col-lg-6" data-toggle="modal" data-target="#myModalArranjo">Arranjo</button></div><br> -->
+    <div id="div2" style="display:none" class="row"><button id="button-tutorial" class="btn res btn-info btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalEquipamentos">Tutorial</button><button id="button-analise" class="res btn btn-success btn-responsive col-xs-6 col-md-6 col-sm-6 col-lg-6" data-toggle="modal" data-target="#myModalAnalise" onclick="graphVpl()">Análise de Investimentos</button></div><br>
     <div class="print" id = "resultado">
       <!-- aqui vai o resultado do dimensionamento -->
     </div>
+    <!-- Modal Painel inserido-->
+    <div class="modal fade" id="myModalPainelinserido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Dados do painel</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Potência:</span>
+              <input id="painelpotencia"type="text" class="form-control" placeholder="W" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Tensão máxima:</span>
+              <input id="painelvmax" type="text" class="form-control" placeholder="V" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Tensão mínima:  </span>
+              <input id="painelvmin" type="text" class="form-control" placeholder="V" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Corrente de curto circuito:</span>
+              <input id="correntesc" type="text" class="form-control" placeholder="A" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Nome:</span>
+              <input id="painelnome" type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+            </div>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">Preço:</span>
+              <input id="preco" type="text" class="form-control" placeholder="R$" aria-describedby="sizing-addon1">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div>
+              <button type="button" class="btn btn-danger" onclick="dadosPainel()">Enviar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" >Fechar</button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Tutorial -->
+      <div class="modal fade" id="myModalEquipamentos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Tutorial</h4>
+            </div>
+            <div class="modal-body">
+              <ul class="nav nav-pills" id="topo">
+                <li class="current"><a href="#determinacao-demanda">Demanda</a></li>
+                <li><a href="#determinacao-potencia">Potência</a></li>
+                <li><a href="#determinacao-inversor">Inversor</a></li>
+                <li><a href="#determinacao-paineis">Painéis</a></li>
+                <li><a href="#determinacao-arranjo">Arranjo</a></li>
+                <li><a href="#determinacao-energia">Energia</a></li>
+                <li><a href="#determinacao-financeiro" >Investimento</a></li>
+                <!-- <li><a href="#determinacao-arranjo" class="scrollSuave">Arranjo</a></li> -->
+              </ul>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-demanda"><strong><br><center>Cálculo da demanda e dos recursos de Energia</center></strong></a></div>
+              <div id="tutorial-intro"></div>
+              <div id="tutorial-hsp-imagem"><img src="imagens/hsp.png" class="img-responsive center-block" alt="labsolarLogo"></div>
+              <div id="tutorial-hsp"></div>
+              <div id="tutorial-consumo-mensal"></div>
+              <div id="tutorial-custo-disponibilidade"></div>
+              <div id="tutorial-intro-diaria"></div>
+              <div id="tutorial-consumo-diario"></div>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-potencia"><strong><br><center>Estimativa da Potência do sistema</center></strong></a></div>
+              <div id="tutorial-TD"></div>
+              <div id="tutorial-pot-necessaria"></div>
+              <div id="tutorial-dimensionamento-intro"></div>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-inversor"><strong><br><center>Determinação da potência e do modelo do inversor</center></strong></a></div>
+              <div id="tutorial-dimensionamento-10000"></div>
+              <div id="tutorial-dimensionamento-10000-potencia"></div>
+              <div id="tutorial-dimensionamento-10000-inversor"></div>
+              <div id="tutorial-dimensionamento-10000"></div>
+              <div id="tutorial-dimensionamento"></div>
+              <div id="tutorial-dimensionamento-potencia"></div>
+              <div id="tutorial-dimensionamento-inversor"></div>
+              <div id="tutorial-dimensionamento-gt260"></div>
+              <div id="tutorial-dimensionamento-gt260-potencia"></div>
+              <div><a href="#topo" style="text-decoration:none" id="determinacao-paineis"><strong><br><center>Determinação do número de painéis</center></strong></a></div>
+              <div id="tutorial-dimensionamento-numero-paineis-1"></div>
+              <div id="tutorial-dimensionamento-numero-paineis-2"></div>
+              <div><a href="#topo"  style="text-decoration:none" id="determinacao-arranjo"><strong><br><center>Determinação do arranjo dos painéis</center></strong></a></div>
+              <div id="tutorial-dimensionamento-arranjo"></div>
+              <div id="tutorial-dimensionamento-arranjo-inversor"></div>
+              <div id="tutorial-dimensionamento-arranjo-painel"></div>
+              <div id="tutorial-dimensionamento-arranjo-2"></div>
+              <div id="tutorial-dimensionamento-arranjo-3"></div>
+              <div><a href="#topo"  style="text-decoration:none" id="determinacao-energia"><strong><br><center>Energia produzida pelo sistema</center></strong></a></div>
+              <div id="tutorial-energia-diaria"></div>
+              <div id="tutorial-energia-mensal"></div>
+              <div id="tutorial-energia-anual"></div>
+              <div><a href="#topo"  style="text-decoration:none" id="determinacao-financeiro"><strong><br><center>Análise de Investimentos</center></strong></a></div>
+              <div id="tutorial-financeiro"></div>
+              <div id="tutorial-financeiro-2"></div>
+              <div id="tutorial-financeiro-VLP"></div>
+              <div id="tutorial-financeiro-TIR"></div>
+              <div id="tutorial-financeiro-PB"></div>
+              <div id="tutorial-financeiro-PBD"></div>
+              <div id="tutorial-financeiro-final"></div>
+              <div id="tutorial-dimensionamento"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Análise -->
+      <div class="modal fade" id="myModalAnalise" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Análise de Investimentos</h4>
+            </div>
+            <div class="modal-body" id="inverstimento-pdf">
+              <div id="vida-util"></div>
+              <div id="preco-paineis"></div>
+              <div id="preco-inversores"></div>
+              <div id="custo-total-estrutura"></div>
+              <div id="custo-total-cabeamento"></div>
+              <canvas id="myChartVPL"></canvas><br>
+              <canvas id="myChartTir"></canvas><br>
+              <canvas id="myChartPB"></canvas><br>
+              <canvas id="myChartPBD"></canvas><br>
+              <div> <strong>Observação:</strong> A ausência de valores para o Payback e o Payback Descontado significa que o sistema não se paga dado o número de painéis.</div><br>
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-info btn-responsive"  id="go" onclick="exportarInvestimento()">Exportar PDF</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </body>
+  <style>
+    button.res {
+        height: 80px;
+        /*margin-left: 2px;
+        margin-right: 2px;*/
+    }
+  </style>
   <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- o script abaixo refere-se à conversão de dados para pdf, link para detalhes abaixo também-->
+  <!-- https://stackoverflow.com/questions/18191893/generate-pdf-from-html-in-div-using-javascript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
   <script>
     // Initialize Firebase
     var config = {
@@ -27,5 +424,4 @@
     };
     firebase.initializeApp(config);
   </script>
-  <script src="js/main.js"></script>
 </html>
